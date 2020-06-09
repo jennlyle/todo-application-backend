@@ -21,4 +21,20 @@ app.post("/tasks", function(req, res) {
   });
 });
 
+app.delete("/tasks/:taskId", function(req, res) {
+  const id = req.params.taskId;
+
+  res.json({
+    message: `Received a request to delete task ${id}`
+  });
+});
+
+app.put("/tasks/:taskId", function(req, res) {
+  const id = req.params.taskId;
+
+  res.json({
+    message: `Received a request to update task ${id}`
+  });
+});
+
 module.exports.handler = serverless(app);
