@@ -57,9 +57,13 @@ app.post("/tasks", function(req, res) {
 app.delete("/tasks/:taskId", function(req, res) {
   const id = req.params.taskId;
 
-  res.json({
-    message: `Received a request to delete task ${id}`
-  });
+  // res.json({
+  //   message: `Received a request to delete task ${id}`
+  // });
+
+  res.status(200).send(`You issued a delete request for ID: ${id}`);
+
+
 });
 
 app.put("/tasks/:taskId", function(req, res) {
