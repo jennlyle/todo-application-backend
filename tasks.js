@@ -9,7 +9,40 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/tasks", function(req, res) {
-  res.send({ tasks: ["water plants", "do dishes", "buy oats"] });
+  // const text = req.body.text;
+  // const completed = req.body.completed;
+  // const date = req.body.date;
+  // const id = req.body.id;
+
+  const myGetTasksDummyData = { "tasks": {
+    "task": [
+      {
+        "text": "sweep floor",
+        "completed": true,
+        "date": "2019-10-10",
+        "id": 1
+      }, 
+      {
+        "text": "wash car",
+        "completed": false,
+        "date": "2019-10-09",
+        "id": 2
+      }, 
+      {
+        "text": "buy cat food",
+        "completed": true,
+        "date": "2019-10-08",
+        "id": 3
+      }, 
+      {
+        "text": "wash dishes",
+        "completed": true,
+        "date": "2019-10-08",
+        "id": 4
+      }, 
+    ]}
+  };
+  res.status(200).send(myGetTasksDummyData);
 });
 
 app.post("/tasks", function(req, res) {
