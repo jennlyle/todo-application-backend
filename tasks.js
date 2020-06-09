@@ -48,26 +48,20 @@ app.get("/tasks", function(req, res) {
 app.post("/tasks", function(req, res) {
   const text = req.body.text;
   const date = req.body.date;
-
-  res.json({
-    message: `Received a request to add task ${text} with date ${date}`
-  });
+  res.status(201).send(`Received a request to add task ${text} with date ${date}`);
 });
 
 app.delete("/tasks/:taskId", function(req, res) {
   const id = req.params.taskId;
-
-  // res.json({
-  //   message: `Received a request to delete task ${id}`
-  // });
-
   res.status(200).send(`You issued a delete request for ID: ${id}`);
-
-
 });
 
 app.put("/tasks/:taskId", function(req, res) {
-  const id = req.params.taskId;
+  // const id = req.params.taskId;
+  // const text = req.body.text;
+  // const completed = req.body.completed;
+  // const date = req.body.date;
+
 
   res.json({
     message: `Received a request to update task ${id}`
