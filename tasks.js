@@ -57,15 +57,13 @@ app.delete("/tasks/:taskId", function(req, res) {
 });
 
 app.put("/tasks/:taskId", function(req, res) {
-  // const id = req.params.taskId;
-  // const text = req.body.text;
-  // const completed = req.body.completed;
-  // const date = req.body.date;
+  const id = req.params.taskId;
+  const text = req.body.text;
+  const completed = req.body.completed;
+  const date = req.body.date;
 
+  res.status(200).send(`You issued a put request for ID: ${id}`);
 
-  res.json({
-    message: `Received a request to update task ${id}`
-  });
 });
 
 module.exports.handler = serverless(app);
