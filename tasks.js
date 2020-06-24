@@ -18,8 +18,10 @@ const connection = mysql.createConnection({
 })
 
 app.get("/tasks", function(req, res) {
-  const query = "SELECT * FROM tasks";
-  connection.query(query, function(error, data) {
+  // const query = "SELECT * FROM tasks";
+  const query = "SELECT * FROM tasks WHERE (tasks.user_id = ?)";
+  //connection.query(query, function(error, data) {
+    connection.query(query, req.query.user_id, function(error, data) {
     if(error) {
       console.log("Error fetching tasks", error);
       res.status(500).json({
@@ -34,7 +36,10 @@ app.get("/tasks", function(req, res) {
 });
 
 app.post("/tasks", function(req, res) {
+
   const query = "INSERT INTO `tasks` VALUES (?, ?, ?, ?)";
+
+
   connection.query(query, [req.body.task_id, req.body.user_id, req.body.text, 
       req.body.complete_status_id], function(error,data) {
     if (error){
@@ -74,9 +79,9 @@ app.delete("/tasks/:taskId", function(req, res) {
 });
 
 app.put("/tasks/:taskId", function(req, res) {
-  const query = "UPDATE `tasks` SET `tasks`.`user_id` = ?, `tasks`.`text` = ?, `tasks`.complete_status_id = ? WHERE (`tasks`.`task_id` = ?)";
+  const query = "UPDATE `tasks` SET `tasks`.complete_status_id = ? WHERE (`tasks`.`task_id` = ?)";
   
-  connection.query(query,[req.body.user_id, req.body.text, req.body.complete_status_id, req.params.taskId], function (error){
+  connection.query(query,[req.body.complete_status_id, req.params.taskId], function (error){
     if (error){
       console.log("Error updating task", error);
       res.status(500).json({
@@ -88,5 +93,9 @@ app.put("/tasks/:taskId", function(req, res) {
     }
   });
 });
+
+
+
+
 
 module.exports.handler = serverless(app);
